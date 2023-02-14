@@ -27,7 +27,7 @@ export const AuthContextProvider = ({ children }) => {
   }
 
   useEffect(() => {
-    const checkUser = async () => {
+    const fetchUser = async () => {
       try {
         const res = await axios.get("/auth/check")
         setCurrentUser(res.data)
@@ -38,9 +38,11 @@ export const AuthContextProvider = ({ children }) => {
         localStorage.removeItem("user")
       }
     }
-
-    checkUser()
-  }, [])
+  
+    if (!currentUser) {
+      fetchUser()
+    }
+  }, [currentUser])  
 
     return (
     <AuthContext.Provider value={{ currentUser, login, logout }}>
