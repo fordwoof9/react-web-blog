@@ -3,26 +3,48 @@ import { createContext, useEffect, useState } from 'react'
 
 export const AuthContext = createContext()
 
-export const AuthContexProvider = ({ children }) => {
-    // eslint-disable-next-line no-undef
-    const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem("user") || null ))
+export const AuthContextProvider = ({ children }) => {
+  const [currentUser, setCurrentUser] = useState(JSON.parse(localStorage.getItem("user") || null ))
 
-    const login = async(inputs) => {
-        const res = await axios.post("/auth/login", inputs)
+  const login = async(inputs) => {
+    try {
+      const res = await axios.post("/auth/login", inputs)
+      setCurrentUser(res.data)
+      localStorage.setItem("user", JSON.stringify(res.data))
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  const logout = async(inputs) => {
+    try {
+      await axios.post("/auth/logout")
+      setCurrentUser(null)
+      localStorage.removeItem("user")
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
+  useEffect(() => {
+    const checkUser = async () => {
+      try {
+        const res = await axios.get("/auth/check")
         setCurrentUser(res.data)
-    }
-    const logout = async(inputs) => {
-        await axios.post("/auth/logout")
+        localStorage.setItem("user", JSON.stringify(res.data))
+      } catch (err) {
+        console.error(err)
         setCurrentUser(null)
+        localStorage.removeItem("user")
+      }
     }
 
-    useEffect(() => {
-        localStorage.setItem("user", JSON.stringify(currentUser))
-    }, [currentUser])
+    checkUser()
+  }, [])
 
     return (
-        <AuthContext.Provider value={{ currentUser, login, logout }}>
-            {children}
-        </AuthContext.Provider>
-    )
+    <AuthContext.Provider value={{ currentUser, login, logout }}>
+      {children}
+    </AuthContext.Provider>
+  )
 }
