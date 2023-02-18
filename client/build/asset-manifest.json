@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/static/css/main.e134dc8e.css",
-    "main.js": "/static/js/main.b3b8d850.js",
+    "main.css": "/static/css/main.7676be08.css",
+    "main.js": "/static/js/main.eb07ffa0.js",
     "static/media/ford_logo_black.png": "/static/media/ford_logo_black.97032120c15e081faba5.png",
     "static/media/delete.png": "/static/media/delete.0fb3a192b8de6c581669.png",
     "static/media/edit.png": "/static/media/edit.20b23789e3450cf5cf5f.png",
     "index.html": "/index.html",
-    "main.e134dc8e.css.map": "/static/css/main.e134dc8e.css.map",
-    "main.b3b8d850.js.map": "/static/js/main.b3b8d850.js.map"
+    "main.7676be08.css.map": "/static/css/main.7676be08.css.map",
+    "main.eb07ffa0.js.map": "/static/js/main.eb07ffa0.js.map"
   },
   "entrypoints": [
-    "static/css/main.e134dc8e.css",
-    "static/js/main.b3b8d850.js"
+    "static/css/main.7676be08.css",
+    "static/js/main.eb07ffa0.js"
   ]
 }
